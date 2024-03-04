@@ -15,19 +15,23 @@ fs.readFile('users.json', { encoding: 'utf-8' }, (err, data) => {
     });
 });
 
+app.set('views', './views');
+app.set('view engine', 'jade');
+
 app.get('/', (req, res) => {
-    var buffer = '';
+    res.render('index', {users: user});
+    // var buffer = '';
 
-    users.forEach((user) => {
-        buffer += '<a href="/' + user.first_name + '">' + user.last_name + '</a><br>';
-    });
+    // users.forEach((user) => {
+    //     buffer += '<a href="/' + user.first_name + '">' + user.last_name + '</a><br>';
+    // });
 
-    res.send(buffer);
+    // res.send(buffer);
 });
 
 app.get('/:first_name', (req, res) => {
     res.send('The username is ' + req.params.first_name);
-})
+});
 
 var server = app.listen(port, () => {
     console.log('Server running at : ' + server.address().port);

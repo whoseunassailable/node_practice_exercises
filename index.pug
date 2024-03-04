@@ -1,0 +1,25 @@
+doctype html 
+html
+    head Personal Info 
+    body 
+        h1#pageTitle Welcome to my profile!
+        p.big-para 
+            Hello this is Rohan Bhande. 
+            A 24 year old young kiddo 
+            who is passionate about 
+        ul Hobbies 
+            li Coding 
+            li Cooking 
+            li Playing Games 
+            li Watching movies 
+            li Studying 
+            li Working out 
+            li Making new friends 
+            li This is america
+        ul 
+            each user in users 
+                li
+                    a(href="/" + user.first_name) = user.first_name 
+
+         
+

@@ -1,18 +1,21 @@
+const { error } = require('console');
 const express = require('express');
+const fs = require('fs');
 
 const app = express();
+const port = 3000;
+const filePath = './html/index.html'
 
-app.use('/', (request, response, next) => {
-    console.log('Initial page');
+app.get('/', (req, res, next) => {
+    console.log('First middleware');
     next();
 });
 
-app.use('/welcome',(request, response, next ) => {
-    response.send('<h1>A warm welcome from Rohan</h1>');
-}) ;
+app.get('/', (req, res, next) => {
+    console.log('Second middleware');
+    res.send('<h1>Hi! This is Rohan');
+})
 
-app.use((request, response, next ) => {
-    console.log('Final Page');
-}) ;
-
-app.listen(8000)
+const server = app.listen(port, () => {
+    console.log('Server started at port : ' + server.address().port);
+});
