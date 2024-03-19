@@ -1,21 +1,18 @@
-const { error } = require('console');
 const express = require('express');
-const fs = require('fs');
+const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3000;
-const filePath = './html/index.html'
 
-app.get('/', (req, res, next) => {
-    console.log('First middleware');
-    next();
-});
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-app.get('/', (req, res, next) => {
-    console.log('Second middleware');
-    res.send('<h1>Hi! This is Rohan');
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.use('/admin', adminRoutes);
+app.use('/shop', shopRoutes);
+
+app.use((req, res, next) => {
+    res.status(404).send('<h1>Page not found</h1>');
 })
 
-const server = app.listen(port, () => {
-    console.log('Server started at port : ' + server.address().port);
-});
+app.listen(3000);
